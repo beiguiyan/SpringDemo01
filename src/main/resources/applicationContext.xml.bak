@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- name: bean的别名。id和name都可以被ref引用 -->
+    <!-- scope: bean的范围。singleton单例（默认），prototype非单例。单例bean就是可以反复使用的bean,ioc容器主要就是用来管理单例bean的 -->
+    <!--
+         1.适合交给容器管理的bean；表现层对象，业务层对象，数据层对象，工具类对象。
+         2.不适合交给容器管理的bean：封装实体的域对象
+    -->
+<!--    <bean id="bookDao" name="dao dao1 dao2" scope="singleton"-->
+<!--          class="com.ruantong.yun.dao.impl.BookDaoImpl" init-method="iniBean" destroy-method="destBean"/>-->
+
+<!--    <bean id="bookService" name="book1 book2 book" scope="prototype" class="com.ruantong.yun.service.impl.BookServiceImpl">-->
+<!--        <property name="bookDao" ref="bookDao" />  &lt;!&ndash; seter ref &ndash;&gt;-->
+<!--        <constructor-arg name="bookDao" ref="bookDao" />  &lt;!&ndash; constructor ref &ndash;&gt;-->
+<!--    </bean>-->
+
+<!--    <bean id="factory" class="com.ruantong.yun.util.Factory" factory-method="getInstall" />-->
+
+<!--    <bean id="factory2" class="com.ruantong.yun.util.BookDaoFactory"/>-->
+
+<!--    <bean id="bookDao" class="com.ruantong.yun.dao.impl.BookDaoImpl" />-->
+
+<!--    <bean id="bookService" class="com.ruantong.yun.service.impl.BookServiceImpl" autowire="byType"/>-->
+
+    <context:property-placeholder location="classpath:*.properties" system-properties-mode="NEVER"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${driverClassName}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+    </bean>
+
+    <context:component-scan base-package="com.ruantong" />
+</beans>
